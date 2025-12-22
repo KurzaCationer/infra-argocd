@@ -1,0 +1,10 @@
+### --- IDEs (IntelliJ, JetBrains, etc.) ---
+.idea/
+.idea_modules/
+*.iws
+out/
+cmake-build-*/
+atlassian-ide-plugin.xml
+com_crashlytics_export_strings.xml
+crashlytics*.properties
+fabric.properties
