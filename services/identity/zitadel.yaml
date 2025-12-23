@@ -14,7 +14,7 @@ spec:
         zitadel:
           masterkeySecretName: zitadel-masterkey
           configmapConfig:
-            ExternalDomain: "mijke-identity.dylannas.nl"
+            ExternalDomain: "identity.kurza.nl"
             ExternalPort: 443
             TLS:
               Enabled: false
@@ -32,13 +32,13 @@ spec:
                     Mode: "disable"
         ingress:
           enabled: true
-          className: "nginx" # Replace with your var.ingress_class_name
+          className: "traefik"
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt-prod"
         login:
           ingress:
             enabled: true
-            className: "nginx" # Replace with your var.ingress_class_name
+            className: "traefik"
             annotations:
               cert-manager.io/cluster-issuer: "letsencrypt-prod"
           image:
