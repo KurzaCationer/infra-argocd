@@ -3,12 +3,17 @@ kind: Application
 metadata:
   name: cnpg
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://cloudnative-pg.github.io/charts
-    targetRevision: "0.27.0"
-    chart: cloudnative-pg
+    path: releases/
+    repoURL: https://github.com/cloudnative-pg/cloudnative-pg.git
+    targetRevision: main
+    directory:
+      recurse: false
+      include: 'cnpg-1.28.0.yaml'
   destination:
     server: https://kubernetes.default.svc
     namespace: cnpg-system
@@ -17,3 +22,5 @@ spec:
       enabled: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true
