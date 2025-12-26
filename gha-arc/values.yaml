@@ -1,0 +1,22 @@
+targetRevision: 0.13.1
+controller:
+  namespace: gha-arc-system
+  name: gha-runner-scale-set-controller
+
+organizations:
+  - name: mijke
+    orgName: metmij
+    scaleSetName: selfhosted
+    secretName: gha-arc-mijke
+    minRunners: 2
+    maxRunners: 10
+
+accounts:
+  - name: personal
+    accountName: KurzaCationer
+    scaleSetName: selfhosted
+    secretName: gha-arc-personal
+    minRunners: 2
+    maxRunners: 5
+    repositories:
+      - "infra-terraform"

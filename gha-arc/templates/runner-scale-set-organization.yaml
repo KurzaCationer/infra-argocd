@@ -1,22 +1,29 @@
+{{- range .Values.organizations}}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gha-runner-scale-set-controller
+  name: runner-scale-set-{{.name}}
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'ghcr.io/actions/actions-runner-controller-charts'
-    chart: "gha-runner-scale-set-controller"
-    targetRevision: 0.13.1
+    chart: "gha-runner-scale-set"
+    targetRevision: {{$.Values.targetRevision}}
     helm:
       valuesObject:
         controllerServiceAccount:
           namespace: gha-arc-system
           name: gha-runner-scale-set-controller-gha-rs-controller
+        githubConfigSecret: {{.secretName}}
+        githubConfigUrl: "https://github.com/{{.orgName}}"
+        runnerScaleSetName: {{.scaleSetName}}
+        maxRunners: {{.maxRunners}}
+        minRunners: {{.minRunners}}
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: gha-arc-system
+    namespace: gha-arc-runners-{{.name}}
   syncPolicy:
     automated:
       prune: true
@@ -24,3 +31,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+{{- end}}

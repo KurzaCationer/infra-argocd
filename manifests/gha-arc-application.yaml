@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gha-arc
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/KurzaCationer/infra-argocd.git'
+    targetRevision: main
+    path: "gha-arc"
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
