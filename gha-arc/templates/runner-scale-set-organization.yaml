@@ -6,7 +6,7 @@ metadata:
   name: runner-scale-set-{{.name}}
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io/background
 spec:
   project: default
   source:
@@ -18,6 +18,14 @@ spec:
         controllerServiceAccount:
           namespace: gha-arc-system
           name: gha-runner-scale-set-controller-gha-rs-controller
+        containerMode:
+          type: "kubernetes"
+          kubernetesModeWorkVolumeClaim:
+            accessModes: [ "ReadWriteOnce" ]
+            storageClassName: "local-path"
+            resources:
+              requests:
+                storage: 10Gi
         githubConfigSecret: {{.secretName}}
         githubConfigUrl: "https://github.com/{{.orgName}}"
         runnerScaleSetName: {{.scaleSetName}}
