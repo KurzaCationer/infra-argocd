@@ -16,6 +16,8 @@ kind: Application
 metadata:
   name: runner-scale-set-{{$name}}-{{$repository}}
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
