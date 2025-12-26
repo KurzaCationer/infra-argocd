@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: zitadel
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
 spec:
   project: default
   source:
@@ -36,6 +38,10 @@ spec:
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt-prod"
         login:
+          customConfigmapConfig = |
+            ZITADEL_SERVICE_USER_TOKEN_FILE="/login-client/pat"
+            ZITADEL_API_URL="http://zitadel:8080"
+            CUSTOM_REQUEST_HEADERS="Host:identity.kurza.nl,X-Zitadel-Public-Host:identity.kurza.nl"
           ingress:
             enabled: true
             className: "traefik"
