@@ -19,7 +19,7 @@ spec:
           namespace: gha-arc-system
           name: gha-runner-scale-set-controller-gha-rs-controller
         containerMode:
-          type: kubernetes
+          type: "kubernetes-novolume"
         githubConfigSecret: {{.secretName}}
         githubConfigUrl: "https://github.com/{{.orgName}}"
         runnerScaleSetName: {{.scaleSetName}}
