@@ -18,6 +18,7 @@ spec:
         controllerServiceAccount:
           namespace: gha-arc-system
           name: gha-runner-scale-set-controller-gha-rs-controller
+        containerMode: kubernetes
         githubConfigSecret: {{.secretName}}
         githubConfigUrl: "https://github.com/{{.orgName}}"
         runnerScaleSetName: {{.scaleSetName}}
