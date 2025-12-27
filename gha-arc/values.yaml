@@ -6,7 +6,7 @@ controller:
 organizations:
   - name: mijke
     orgName: metmij
-    scaleSetName: selfhosted
+    scaleSetName: self-hosted
     secretName: gha-arc-mijke
     minRunners: 2
     maxRunners: 10
@@ -14,7 +14,7 @@ organizations:
 accounts:
   - name: personal
     accountName: KurzaCationer
-    scaleSetName: selfhosted
+    scaleSetName: self-hosted
     secretName: gha-arc-personal
     minRunners: 2
     maxRunners: 5
