@@ -29,14 +29,6 @@ spec:
         controllerServiceAccount:
           namespace: {{$controller.namespace}}
           name: {{$controller.name}}-gha-rs-controller
-        containerMode:
-          type: "kubernetes"
-          kubernetesModeWorkVolumeClaim:
-            accessModes: [ "ReadWriteOnce" ]
-            storageClassName: "local-path"
-            resources:
-              requests:
-                storage: 10Gi
         githubConfigSecret: {{$secretName}}
         githubConfigUrl: "https://github.com/{{$accountName}}/{{$repository}}"
         runnerScaleSetName: {{$scaleSetName}}
