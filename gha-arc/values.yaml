@@ -20,3 +20,4 @@ accounts:
     maxRunners: 5
     repositories:
       - "infra-terraform"
+      - "infra-argocd"
